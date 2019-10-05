@@ -1,8 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { apiURL, apiKey } from "./config/config.json";
-
 axios.interceptors.response.use(null, error => {
   const expectedError =
     error.response &&
@@ -17,12 +15,6 @@ axios.interceptors.response.use(null, error => {
   return Promise.reject(error);
 });
 
-function setAppId(appId) {
-  axios.defaults.baseURL = apiURL;
-  axios.defaults.headers.common["APPID"] = apiKey;
-}
-
 export default {
-  get: axios.get,
-  setAppId
+  get: axios.get
 };
