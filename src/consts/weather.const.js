@@ -1,0 +1,1 @@
+export const GET_TODAY_WEATHER = "GET_TODAY_WEATHER";
