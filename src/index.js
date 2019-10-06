@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Main from "./pages/Main";
+import TodayBoard from "./pages/TodayBoard";
 
 import "./index.css";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
 
 function App() {
   return (
     <div className="App">
-      <Main />
+      <TodayBoard />
     </div>
   );
 }
