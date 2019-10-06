@@ -24,6 +24,7 @@ export const useWeather = () => {
     thunk
   ]);
 
+  // Map actions in object
   const weatherActions = {
     getTodayWeather: city => dispatch(getTodayWeather(city))
   };
