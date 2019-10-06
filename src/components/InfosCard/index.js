@@ -2,7 +2,7 @@ import React from "react";
 
 import "./index.scss";
 
-const InfosCard = ({ data }) => {
+const InfosCard = ({ data, background }) => {
   // Display spinner while data loading
 
   // Destructure data
@@ -18,8 +18,11 @@ const InfosCard = ({ data }) => {
     `https://openweathermap.org/img/wn/${iconId}@2x.png`;
 
   return (
-    <div className="card-weather container-fluid">
-      <div className="row d-flex justify-content-center">
+    <div
+      className="card-weather container-fluid"
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <div className="row">
         <h2 className="card-weather-city">{city}</h2>
         <div className="col-6 card-weather-col-measurements">
           <h4 className="card-weather-description">

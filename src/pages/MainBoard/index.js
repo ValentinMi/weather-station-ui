@@ -1,26 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { useWeather } from "../../hooks/useWeather";
+import useWeather from "../../hooks/useWeather";
+import useMediaWiki from "../../hooks/useMediaWiki";
 
 import InfosCard from "../../components/InfosCard";
 import Spinner from "../../components/Spinner/index";
 
+import { defaultCity } from "../../config/config.json";
+
 import "./index.scss";
 
 const MainBoard = () => {
-  const [state, weatherActions] = useWeather();
+  // Hooks
+  const [city, setCity] = useState(defaultCity);
+  const [weatherState] = useWeather(city);
+  const [mediaWikiState] = useMediaWiki(city);
 
-  const { isLoading, todayData } = state;
+  // Destructure state and rename isLoading
+  const { isLoading: weatherIsLoading, todayData } = weatherState;
+  const { isLoading: mediaWikiIsLoading, imgSrc } = mediaWikiState;
 
   return (
     <>
       <div className="container-fluid board">
-        {isLoading ? (
+        {// Display spinner on loading
+        weatherIsLoading || mediaWikiIsLoading ? (
           <Spinner />
         ) : (
           <div className="row">
             <div className="col-md-6">
-              <InfosCard data={todayData} />
+              <InfosCard data={todayData} background={imgSrc} />
             </div>
           </div>
         )}

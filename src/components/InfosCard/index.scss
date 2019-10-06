@@ -10,8 +10,14 @@ $font-color: #fff;
   padding: 6%;
   height: 100%;
   border: double 1px #ecf0f1;
-  background: rgba(55, 96, 148, 0.8);
   color: $font-color;
+  // Background and overlay
+  background-size: cover;
+  box-shadow: inset 0 0 0 2000px rgba(33, 93, 223, 0.5);
+  .card-weather-city {
+    width: 100%;
+    text-align: center;
+  }
   .card-weather-col-measurements {
     & > * {
       margin: 8% 0;

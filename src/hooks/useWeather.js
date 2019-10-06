@@ -5,14 +5,10 @@ import { getTodayWeather } from "../actions/weather.actions";
 
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
-
 import useMiddleware from "react-usemiddleware";
 
-import { defaultCity } from "../config/config.json";
-
-export const useWeather = () => {
+const useWeather = city => {
   const initState = {
-    city: defaultCity,
     selectedPeriod: "today",
     todayData: undefined,
     nextData: undefined,
@@ -30,11 +26,8 @@ export const useWeather = () => {
     getTodayWeather: city => dispatch(getTodayWeather(city))
   };
 
-  // Destructure state
-  const { city, selectedPeriod } = state;
-
   useEffect(() => {
-    switch (selectedPeriod) {
+    switch (state.selectedPeriod) {
       case "today":
         weatherActions.getTodayWeather(city);
         break;
@@ -42,7 +35,7 @@ export const useWeather = () => {
       default:
         throw new Error("Unknown selected period");
     }
-  }, [city, selectedPeriod]);
+  }, [city, state.selectedPeriod]);
 
   return [state, weatherActions];
 };
@@ -65,3 +58,5 @@ function weatherReducer(state, action) {
       return state;
   }
 }
+
+export default useWeather;
