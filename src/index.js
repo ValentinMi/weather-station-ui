@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TodayBoard from "./pages/TodayBoard";
+import MainBoard from "./pages/MainBoard";
 
 import "./index.css";
 
@@ -10,7 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 function App() {
   return (
     <div className="App">
-      <TodayBoard />
+      <MainBoard />
     </div>
   );
 }

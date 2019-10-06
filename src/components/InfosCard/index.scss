@@ -1,0 +1,42 @@
+$font-color: #fff;
+
+.card-weather {
+  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.11);
+  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.11);
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  padding: 6%;
+  height: 100%;
+  border: double 1px #ecf0f1;
+  background: rgba(55, 96, 148, 0.8);
+  color: $font-color;
+  .card-weather-col-measurements {
+    & > * {
+      margin: 8% 0;
+    }
+    padding-left: 8%;
+    .card-weather-description {
+      font-weight: bold;
+    }
+    .card-weather-temperature {
+      font-size: 4em;
+    }
+    .card-weather-temperature-minmax {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 1.5em;
+    }
+  }
+  .card-weather-icon {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 150px;
+    }
+  }
+}

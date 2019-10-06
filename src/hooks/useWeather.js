@@ -15,10 +15,11 @@ export const useWeather = () => {
     city: defaultCity,
     selectedPeriod: "today",
     todayData: undefined,
-    nextDaysData: undefined,
+    nextData: undefined,
     isLoading: true,
     error: null
   };
+
   const [state, dispatch] = useMiddleware(weatherReducer, initState, [
     promise,
     thunk

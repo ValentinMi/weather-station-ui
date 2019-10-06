@@ -1,0 +1,11 @@
+.spinner-content {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .spinner {
+    height: 15rem;
+    width: 15rem;
+  }
+}
