@@ -2,7 +2,7 @@ import React from "react";
 
 import "./index.scss";
 
-const InfosCard = ({ data, background }) => {
+const InfosCard = ({ data, background, icon }) => {
   // Display spinner while data loading
 
   // Destructure data
@@ -11,11 +11,8 @@ const InfosCard = ({ data, background }) => {
   // Measurements
   const { humidity, pressure, temp, temp_max, temp_min } = data.main;
   // Weather
-  const { description, icon } = data.weather[0];
+  const { description } = data.weather[0];
   // Date
-
-  const getWeathericon = iconId =>
-    `https://openweathermap.org/img/wn/${iconId}@2x.png`;
 
   return (
     <div
@@ -38,16 +35,12 @@ const InfosCard = ({ data, background }) => {
         </div>
         <div className="col-6">
           <div className="card-weather-icon">
-            <img src={getWeathericon(icon)} alt="Logo" />
+            <img src={icon} alt="Logo" />
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-function renderTodayCard() {
-  return null;
-}
 
 export default InfosCard;

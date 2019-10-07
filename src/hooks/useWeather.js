@@ -10,7 +10,7 @@ import useMiddleware from "react-usemiddleware";
 const useWeather = city => {
   const initState = {
     selectedPeriod: "today",
-    todayData: undefined,
+    actualWeatherData: undefined,
     nextData: undefined,
     isLoading: true,
     error: null
@@ -37,7 +37,16 @@ const useWeather = city => {
     }
   }, [city, state.selectedPeriod]);
 
-  return [state, weatherActions];
+  const getWeatherIconSrc = () => {
+    if (state.actualWeatherData !== undefined) {
+      return `https://openweathermap.org/img/wn/${state.actualWeatherData.weather[0].icon}@2x.png`;
+    }
+    return;
+  };
+
+  const weatherIconSrc = getWeatherIconSrc();
+
+  return [state, weatherActions, weatherIconSrc];
 };
 
 // Reducer
@@ -52,8 +61,7 @@ function weatherReducer(state, action) {
     case weatherConst.GET_TODAY_WEATHER_REJECTED:
       return { ...state, isLoading: false, error: payload.message };
     case weatherConst.GET_TODAY_WEATHER_FULFILLED:
-      return { ...state, isLoading: false, todayData: payload.data };
-
+      return { ...state, isLoading: false, actualWeatherData: payload.data };
     default:
       return state;
   }

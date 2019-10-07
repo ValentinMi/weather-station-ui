@@ -1,5 +1,5 @@
 {
   "apiKey": "8777128c0853480829900d5a7e7aa910",
   "apiURL": "http://api.openweathermap.org/data/2.5",
-  "defaultCity": "Lens"
+  "defaultCity": "Paris"
 }

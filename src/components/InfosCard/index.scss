@@ -1,22 +1,21 @@
 $font-color: #fff;
 
 .card-weather {
-  -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.11);
-  -moz-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.11);
-  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.11);
-  border-radius: 10px 10px 10px 10px;
-  -moz-border-radius: 10px 10px 10px 10px;
-  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10%;
   padding: 6%;
   height: 100%;
-  border: double 1px #ecf0f1;
   color: $font-color;
   // Background and overlay
   background-size: cover;
-  box-shadow: inset 0 0 0 2000px rgba(33, 93, 223, 0.5);
+  background-position: center;
+  // box-shadow: inset 0 0 0 200px rgba(33, 93, 223, 0.5);
+  box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.3);
   .card-weather-city {
     width: 100%;
     text-align: center;
+  }
+  .card-weather-city {
+    font-weight: bold;
   }
   .card-weather-col-measurements {
     & > * {
@@ -43,6 +42,9 @@ $font-color: #fff;
     align-items: center;
     img {
       height: 150px;
+      background-color: rgba(211, 211, 211, 0.3);
+
+      border-radius: 50%;
     }
   }
 }
