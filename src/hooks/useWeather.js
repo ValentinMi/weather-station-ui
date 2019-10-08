@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import * as weatherConst from "../consts/weather.const";
 import { getTodayWeather } from "../actions/weather.actions";
@@ -6,8 +6,6 @@ import { getTodayWeather } from "../actions/weather.actions";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 import useMiddleware from "react-usemiddleware";
-
-import useParameters from "../hooks/useParameters";
 
 const useWeather = (city, refreshInterval) => {
   const initState = {

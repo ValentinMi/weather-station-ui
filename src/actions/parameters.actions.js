@@ -18,15 +18,9 @@ export const switchWeatherInfos = () => dispatch => {
   });
 };
 
-export const openParameters = () => dispatch => {
+export const switchSettingsVisibility = () => dispatch => {
   dispatch({
-    type: parametersConst.OPEN_PARAMETERS
-  });
-};
-
-export const closeParameters = () => dispatch => {
-  dispatch({
-    type: parametersConst.CLOSE_PARAMETERS
+    type: parametersConst.SWITCH_SETTINGS_VISIBILITY
   });
 };
 

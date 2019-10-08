@@ -1,5 +1,3 @@
-import { useReducer } from "react";
-
 import thunk from "redux-thunk";
 import useMiddleware from "react-usemiddleware";
 
@@ -8,8 +6,7 @@ import {
   switchMediaWikiImg,
   switchBackgroundVideo,
   switchWeatherInfos,
-  openParameters,
-  closeParameters,
+  switchSettingsVisibility,
   changeRefreshInterval
 } from "../actions/parameters.actions";
 
@@ -30,8 +27,7 @@ const useParameters = () => {
     switchMediaWikiImg: () => dispatch(switchMediaWikiImg()),
     switchBackgroundVideo: () => dispatch(switchBackgroundVideo()),
     switchWeatherInfos: () => dispatch(switchWeatherInfos()),
-    openParameters: () => dispatch(openParameters()),
-    closeParameters: () => dispatch(closeParameters()),
+    switchSettingsVisibility: () => dispatch(switchSettingsVisibility()),
     changeRefreshInterval: nbr => dispatch(changeRefreshInterval(nbr))
   };
 
@@ -81,11 +77,8 @@ function parametersReducer(state, action) {
     case parametersConst.CHANGE_REFRESH_INTERVAL:
       return { ...state, refreshInterval: payload.nbr };
 
-    case parametersConst.OPEN_PARAMETERS:
-      return { ...state, isVisible: true };
-
-    case parametersConst.CLOSE_PARAMETERS:
-      return { ...state, isVisible: false };
+    case parametersConst.SWITCH_SETTINGS_VISIBILITY:
+      return { ...state, isVisible: !state.isVisible };
     default:
       return state;
   }

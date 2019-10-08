@@ -18,7 +18,6 @@ import "./index.scss";
 const MainBoard = () => {
   // useState hook
   const [city, setCity] = useState(defaultCity);
-  const [, intervalRefresh] = useState();
 
   // Parameters custom hook
   const [paramsState, parameters, paramsActions] = useParameters();
@@ -60,37 +59,29 @@ const MainBoard = () => {
           <Spinner isBackgroundSpinner={true} />
         ) : (
           <>
-            {
-              <div className="row">
-                <div className="col-md-6">
-                  {weatherInfos && (
-                    <InfosCard
-                      data={actualWeatherData}
-                      background={mediaWikiImg && imgSrc}
-                      icon={weatherIconSrc}
-                      refreshWeather={() =>
-                        weatherActions.getTodayWeather(city)
-                      }
-                    />
-                  )}
-                </div>
-                <div className="col-md-6">
-                  {paramsState.isVisible ? (
-                    <ParametersList
-                      parameters={parameters}
-                      closeAction={paramsActions.closeParameters}
-                    />
-                  ) : (
-                    <img
-                      className="settingsIcon"
-                      src={settingsIcon}
-                      alt="Settings"
-                      onClick={() => paramsActions.openParameters()}
-                    />
-                  )}
-                </div>
+            <img
+              className="settingsIcon"
+              src={settingsIcon}
+              alt="Settings"
+              onClick={() => paramsActions.switchSettingsVisibility()}
+            />
+            <div className="row">
+              <div className="col-md-6">
+                {weatherInfos && (
+                  <InfosCard
+                    data={actualWeatherData}
+                    background={mediaWikiImg && imgSrc}
+                    icon={weatherIconSrc}
+                    refreshWeather={() => weatherActions.getTodayWeather(city)}
+                  />
+                )}
               </div>
-            }
+              <div className="col-md-6">
+                {paramsState.isVisible && (
+                  <ParametersList parameters={parameters} />
+                )}
+              </div>
+            </div>
           </>
         )}
       </div>
