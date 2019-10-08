@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import * as weatherConst from "../consts/weather.const";
 import { getTodayWeather } from "../actions/weather.actions";
@@ -7,7 +7,9 @@ import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 import useMiddleware from "react-usemiddleware";
 
-const useWeather = city => {
+import useParameters from "../hooks/useParameters";
+
+const useWeather = (city, refreshInterval) => {
   const initState = {
     selectedPeriod: "today",
     actualWeatherData: undefined,
@@ -26,6 +28,7 @@ const useWeather = city => {
     getTodayWeather: city => dispatch(getTodayWeather(city))
   };
 
+  // Refresh weather on period change
   useEffect(() => {
     switch (state.selectedPeriod) {
       case "today":
@@ -36,6 +39,14 @@ const useWeather = city => {
         throw new Error("Unknown selected period");
     }
   }, [city, state.selectedPeriod]);
+
+  // Interval refresh
+  useEffect(() => {
+    setInterval(() => {
+      weatherActions.getTodayWeather(city);
+      console.log("boom");
+    }, [refreshInterval]);
+  }, [refreshInterval]);
 
   const getWeatherIconSrc = () => {
     if (state.actualWeatherData !== undefined) {

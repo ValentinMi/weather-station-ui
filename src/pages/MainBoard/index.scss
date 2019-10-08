@@ -1,4 +1,11 @@
 .board {
   height: 100vh;
   padding: 5%;
+  // Default background is backvideo is off
+  background: black;
+  .settingsIcon {
+    position: absolute;
+    top: -10%;
+    right: 2%;
+  }
 }

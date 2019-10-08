@@ -1,10 +1,10 @@
 import React from "react";
 
+import refreshIcon from "../../assets/refresh.png";
+
 import "./index.scss";
 
-const InfosCard = ({ data, background, icon }) => {
-  // Display spinner while data loading
-
+const InfosCard = ({ data, background, icon, refreshWeather }) => {
   // Destructure data
   // Place
   const { name: city } = data;
@@ -17,6 +17,7 @@ const InfosCard = ({ data, background, icon }) => {
   return (
     <div
       className="card-weather container-fluid"
+      // Display city background on card if param is selected
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="row">
@@ -39,6 +40,12 @@ const InfosCard = ({ data, background, icon }) => {
           </div>
         </div>
       </div>
+      <img
+        className="card-weather-refresh"
+        src={refreshIcon}
+        alt="Refresh"
+        onClick={() => refreshWeather()}
+      />
     </div>
   );
 };

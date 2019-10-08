@@ -1,0 +1,13 @@
+.params-list {
+  background: rgba(211, 211, 211, 0.7);
+  border-radius: 5%;
+  padding: 5%;
+  width: 75%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  .params-cancel {
+    width: 30px;
+  }
+}
