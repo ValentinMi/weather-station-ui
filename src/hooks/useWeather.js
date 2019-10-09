@@ -31,7 +31,6 @@ const useWeather = (refreshInterval, city) => {
     switch (state.selectedPeriod) {
       case "today":
         weatherActions.getTodayWeather(city);
-        console.log("bite");
         break;
 
       default:
@@ -43,7 +42,6 @@ const useWeather = (refreshInterval, city) => {
   useEffect(() => {
     setInterval(() => {
       weatherActions.getTodayWeather(city);
-      console.log("boom");
     }, [refreshInterval]);
   }, [refreshInterval]);
 
