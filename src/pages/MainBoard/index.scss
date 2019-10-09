@@ -11,4 +11,8 @@
     border-radius: 50%;
     padding: 1%;
   }
+  .right-col {
+    display: flex;
+    flex-direction: column;
+  }
 }

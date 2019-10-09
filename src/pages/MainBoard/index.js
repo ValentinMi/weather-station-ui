@@ -71,8 +71,10 @@ const MainBoard = () => {
                   />
                 )}
               </div>
-              <div className="col-md-6">
-                {weatherInfos && <ForecastBoard data={forecastData} />}
+              <div className="col-md-6 right-col">
+                {weatherInfos && !paramsState.isVisible && (
+                  <ForecastBoard data={forecastData} />
+                )}
                 {paramsState.isVisible && (
                   <ParametersList parameters={parameters} />
                 )}
