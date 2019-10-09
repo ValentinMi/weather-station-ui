@@ -4,7 +4,6 @@ import useWeather from "../../hooks/useWeather";
 import "./index.scss";
 
 const ForecastCard = ({ data, index }) => {
-  const iconId = data.weather[0].icon;
   const degree = data.main.temp;
   const date = data.dt_txt;
 
