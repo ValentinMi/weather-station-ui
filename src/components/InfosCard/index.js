@@ -9,7 +9,7 @@ const InfosCard = ({ data, background, icon, refreshWeather }) => {
   // Place
   const { name: city } = data;
   // Measurements
-  const { humidity, pressure, temp, temp_max, temp_min } = data.main;
+  const { temp, temp_max, temp_min } = data.main;
   // Weather
   const { description } = data.weather[0];
   // Date

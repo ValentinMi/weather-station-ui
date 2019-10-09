@@ -20,8 +20,10 @@ const Parameter = ({
       case event.target.name === "number":
         setValue(handleMilliSecondConvertion(event.target.value));
         changeParamAction(value);
+        break;
       case event.target.name === "text":
         setValue(event.target.value);
+        break;
       default:
         break;
     }
