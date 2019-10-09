@@ -7,11 +7,15 @@ import {
   switchBackgroundVideo,
   switchWeatherInfos,
   switchSettingsVisibility,
-  changeRefreshInterval
+  changeRefreshInterval,
+  changeCity
 } from "../actions/parameters.actions";
+
+import { defaultCity } from "../config/config.json";
 
 const useParameters = () => {
   const initState = {
+    city: defaultCity,
     isVisible: false,
     mediaWikiImg: true,
     backgroundVideo: true,
@@ -28,33 +32,40 @@ const useParameters = () => {
     switchBackgroundVideo: () => dispatch(switchBackgroundVideo()),
     switchWeatherInfos: () => dispatch(switchWeatherInfos()),
     switchSettingsVisibility: () => dispatch(switchSettingsVisibility()),
-    changeRefreshInterval: nbr => dispatch(changeRefreshInterval(nbr))
+    changeRefreshInterval: nbr => dispatch(changeRefreshInterval(nbr)),
+    changeCity: city => dispatch(changeCity(city))
   };
 
   const parameters = [
     {
       type: "switch",
-      name: "City image:",
+      name: "City image :",
       action: parametersActions.switchMediaWikiImg,
       isChecked: state.mediaWikiImg
     },
     {
       type: "switch",
-      name: "Background video:",
+      name: "Background video :",
       action: parametersActions.switchBackgroundVideo,
       isChecked: state.backgroundVideo
     },
     {
       type: "switch",
-      name: "Weather infos:",
+      name: "Weather infos :",
       action: parametersActions.switchWeatherInfos,
       isChecked: state.weatherInfos
     },
     {
       type: "value",
-      name: "Refresh interval:",
+      name: "Refresh interval :",
       action: parametersActions.changeRefreshInterval,
       value: state.refreshInterval
+    },
+    {
+      type: "text",
+      name: "City :",
+      action: parametersActions.changeCity,
+      value: state.city
     }
   ];
 
@@ -79,6 +90,10 @@ function parametersReducer(state, action) {
 
     case parametersConst.SWITCH_SETTINGS_VISIBILITY:
       return { ...state, isVisible: !state.isVisible };
+
+    case parametersConst.CHANGE_CITY:
+      return { ...state, city: payload.city };
+
     default:
       return state;
   }

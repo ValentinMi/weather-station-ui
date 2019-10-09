@@ -13,11 +13,17 @@ const Parameter = ({
   const [value, setValue] = useState(defaultValue);
 
   const handleChange = event => {
-    if (typeof event !== "boolean") {
-      setValue(handleMilliSecondConvertion(event.target.value));
-      changeParamAction(value);
-    } else {
-      changeParamAction();
+    switch (true) {
+      case typeof event === "boolean":
+        changeParamAction();
+        break;
+      case event.target.name === "number":
+        setValue(handleMilliSecondConvertion(event.target.value));
+        changeParamAction(value);
+      case event.target.name === "text":
+        setValue(event.target.value);
+      default:
+        break;
     }
   };
 
@@ -62,6 +68,7 @@ const Parameter = ({
         <div className="param">
           <span className="param-name">{name}</span>
           <select
+            name={"number"}
             defaultValue={"15 mins"}
             placeholder={value}
             onChange={event => handleChange(event)}
@@ -75,6 +82,20 @@ const Parameter = ({
             <option>1 h</option>
             <option>3 h</option>
           </select>
+        </div>
+      );
+    case "text":
+      return (
+        <div className="param">
+          <span className="param-name">{name}</span>
+          <input
+            name={"text"}
+            className="param-city-input"
+            type="text"
+            defaultValue={defaultValue}
+            onChange={event => handleChange(event)}
+          />
+          <button onClick={() => changeParamAction(value)}>Valider</button>
         </div>
       );
 

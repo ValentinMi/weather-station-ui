@@ -11,14 +11,9 @@ import ParametersList from "../../components/ParametersList";
 
 import settingsIcon from "../../assets/settings.png";
 
-import { defaultCity } from "../../config/config.json";
-
 import "./index.scss";
 
 const MainBoard = () => {
-  // useState hook
-  const [city, setCity] = useState(defaultCity);
-
   // Parameters custom hook
   const [paramsState, parameters, paramsActions] = useParameters();
 
@@ -26,13 +21,14 @@ const MainBoard = () => {
     backgroundVideo,
     weatherInfos,
     mediaWikiImg,
-    refreshInterval
+    refreshInterval,
+    city
   } = paramsState;
 
   // Weather custom hook
   const [weatherState, weatherActions, weatherIconSrc] = useWeather(
-    city,
-    refreshInterval
+    refreshInterval,
+    city
   );
   const {
     isLoading: weatherIsLoading,

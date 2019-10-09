@@ -32,3 +32,12 @@ export const changeRefreshInterval = nbr => dispatch => {
     }
   });
 };
+
+export const changeCity = city => dispatch => {
+  dispatch({
+    type: parametersConst.CHANGE_CITY,
+    payload: {
+      city
+    }
+  });
+};

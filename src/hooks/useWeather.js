@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 import useMiddleware from "react-usemiddleware";
 
-const useWeather = (city, refreshInterval) => {
+const useWeather = (refreshInterval, city) => {
   const initState = {
     selectedPeriod: "today",
     actualWeatherData: undefined,
@@ -31,6 +31,7 @@ const useWeather = (city, refreshInterval) => {
     switch (state.selectedPeriod) {
       case "today":
         weatherActions.getTodayWeather(city);
+        console.log("bite");
         break;
 
       default:
