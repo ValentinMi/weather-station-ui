@@ -1,0 +1,16 @@
+.card-forecast {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px 10px 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding-right: 10px;
+  .card-forecast-icon {
+    height: 70px;
+  }
+  .card-forecast-degree {
+    font-weight: bold;
+    font-size: 30px;
+  }
+}

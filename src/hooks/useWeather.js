@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 
 import * as weatherConst from "../consts/weather.const";
-import { getTodayWeather } from "../actions/weather.actions";
+import {
+  getTodayWeather,
+  getForecastWeather
+} from "../actions/weather.actions";
 
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
@@ -11,7 +14,7 @@ const useWeather = (refreshInterval, city) => {
   const initState = {
     selectedPeriod: "today",
     actualWeatherData: undefined,
-    nextData: undefined,
+    forecastData: undefined,
     isLoading: true,
     error: null
   };
@@ -23,15 +26,20 @@ const useWeather = (refreshInterval, city) => {
 
   // Map actions in object
   const weatherActions = {
-    getTodayWeather: city => dispatch(getTodayWeather(city))
+    getTodayWeather: city => dispatch(getTodayWeather(city)),
+    getForecastWeather: city => dispatch(getForecastWeather(city))
+  };
+
+  const fetchData = () => {
+    weatherActions.getTodayWeather(city);
+    weatherActions.getForecastWeather(city);
   };
 
   // Refresh weather on period change
   useEffect(() => {
     switch (state.selectedPeriod) {
       case "today":
-        weatherActions.getTodayWeather(city);
-        break;
+        return fetchData();
 
       default:
         throw new Error("Unknown selected period");
@@ -41,7 +49,7 @@ const useWeather = (refreshInterval, city) => {
   // Interval refresh
   useEffect(() => {
     setInterval(() => {
-      weatherActions.getTodayWeather(city);
+      return () => fetchData();
     }, [refreshInterval]);
   }, [refreshInterval]);
 
@@ -49,12 +57,20 @@ const useWeather = (refreshInterval, city) => {
     if (state.actualWeatherData !== undefined) {
       return `https://openweathermap.org/img/wn/${state.actualWeatherData.weather[0].icon}@2x.png`;
     }
-    return;
   };
 
-  const weatherIconSrc = getWeatherIconSrc();
+  const getForecastIconSrc = forecastIndex => {
+    if (state.forecastData !== undefined) {
+      return `https://openweathermap.org/img/wn/${state.forecastData.list[forecastIndex].weather[0].icon}@2x.png`;
+    }
+  };
 
-  return [state, weatherActions, weatherIconSrc];
+  const icons = {
+    actualWeatherIconSrc: getWeatherIconSrc(state.actualWeatherData),
+    getForecastIconSrc
+  };
+
+  return [state, fetchData, icons];
 };
 
 // Reducer
@@ -70,6 +86,12 @@ function weatherReducer(state, action) {
       return { ...state, isLoading: false, error: payload.message };
     case weatherConst.GET_TODAY_WEATHER_FULFILLED:
       return { ...state, isLoading: false, actualWeatherData: payload.data };
+    case weatherConst.GET_FORECAST_WEATHER_PENDING:
+      return { ...state, isLoading: true };
+    case weatherConst.GET_FORECAST_WEATHER_REJECTED:
+      return { ...state, isLoading: false, error: payload.message };
+    case weatherConst.GET_FORECAST_WEATHER_FULFILLED:
+      return { ...state, isLoading: false, forecastData: payload.data };
     default:
       return state;
   }

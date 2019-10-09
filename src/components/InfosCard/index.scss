@@ -2,11 +2,11 @@ $font-color: #fff;
 
 .card-weather {
   position: relative;
-  height: 400px;
   max-width: 370px;
   border-radius: 10%;
   padding: 6%;
   height: 360px;
+  margin-top: 30px;
   color: $font-color;
   // Background and overlay
   background-size: cover;

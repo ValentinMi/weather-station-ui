@@ -22,7 +22,7 @@ const useBackgroundVideo = actualWeatherData => {
   }, [actualWeatherData]);
 
   const BackgroundVideo = () => (
-    <Player src={videoSrc} containerWidth={800} containerHeight={480} />
+    <Player src={showerRainVideo} containerWidth={800} containerHeight={480} />
   );
 
   return [BackgroundVideo];

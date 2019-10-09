@@ -6,6 +6,7 @@ import useBackgroundVideo from "../../hooks/useBackgroundVideo";
 import useParameters from "../../hooks/useParameters";
 
 import InfosCard from "../../components/InfosCard";
+import ForecastBoard from "../../components/ForecastBoard";
 import Spinner from "../../components/Spinner/index";
 import ParametersList from "../../components/ParametersList";
 
@@ -26,13 +27,11 @@ const MainBoard = () => {
   } = paramsState;
 
   // Weather custom hook
-  const [weatherState, weatherActions, weatherIconSrc] = useWeather(
-    refreshInterval,
-    city
-  );
+  const [weatherState, fetchData, icons] = useWeather(refreshInterval, city);
   const {
     isLoading: weatherIsLoading,
     actualWeatherData,
+    forecastData,
     error
   } = weatherState;
 
@@ -67,12 +66,13 @@ const MainBoard = () => {
                   <InfosCard
                     data={actualWeatherData}
                     background={mediaWikiImg && imgSrc}
-                    icon={weatherIconSrc}
-                    refreshWeather={() => weatherActions.getTodayWeather(city)}
+                    icon={icons.actualWeatherIconSrc}
+                    refreshWeather={() => fetchData()}
                   />
                 )}
               </div>
               <div className="col-md-6">
+                {weatherInfos && <ForecastBoard data={forecastData} />}
                 {paramsState.isVisible && (
                   <ParametersList parameters={parameters} />
                 )}
