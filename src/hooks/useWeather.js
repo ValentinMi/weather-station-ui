@@ -85,15 +85,25 @@ function weatherReducer(state, action) {
     case weatherConst.GET_TODAY_WEATHER_REJECTED:
       return { ...state, isLoading: false, error: payload.message };
     case weatherConst.GET_TODAY_WEATHER_FULFILLED:
-      return { ...state, isLoading: false, actualWeatherData: payload.data };
+      return {
+        ...state,
+        isLoading: false,
+        actualWeatherData: payload.data,
+        error: null
+      };
     case weatherConst.GET_FORECAST_WEATHER_PENDING:
       return { ...state, isLoading: true };
     case weatherConst.GET_FORECAST_WEATHER_REJECTED:
       return { ...state, isLoading: false, error: payload.message };
     case weatherConst.GET_FORECAST_WEATHER_FULFILLED:
-      return { ...state, isLoading: false, forecastData: payload.data };
+      return {
+        ...state,
+        isLoading: false,
+        forecastData: payload.data,
+        error: null
+      };
     default:
-      return state;
+      return { ...state };
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import useWeather from "../../hooks/useWeather";
 import useMediaWiki from "../../hooks/useMediaWiki";
@@ -42,9 +42,6 @@ const MainBoard = () => {
   // Background video custom hook
   const [BackgroundVideo] = useBackgroundVideo(actualWeatherData);
 
-  // If error
-  if (error !== null) return <h1>City not found</h1>;
-
   return (
     <>
       {backgroundVideo && <BackgroundVideo />}
@@ -54,6 +51,7 @@ const MainBoard = () => {
           <Spinner isBackgroundSpinner={true} />
         ) : (
           <>
+            {error && <span className="error-message">City not found</span>}
             <img
               className="settingsIcon"
               src={settingsIcon}
