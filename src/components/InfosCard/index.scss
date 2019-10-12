@@ -16,11 +16,9 @@ $font-color: #fff;
   .card-weather-city {
     width: 100%;
     text-align: center;
-  }
-  .card-weather-city {
     font-weight: bold;
   }
-  .card-weather-col-measurements {
+  .card-weather-col-mesurements {
     & > * {
       margin: 8% 0;
     }
@@ -54,5 +52,17 @@ $font-color: #fff;
     position: absolute;
     right: 10px;
     bottom: 10px;
+  }
+
+  .card-weather-mesurements-list {
+    width: 100%;
+    text-transform: capitalize;
+    .card-weather-mesurements-item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
   }
 }

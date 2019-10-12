@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import useIcon from "../../hooks/useIcon";
+import useMesurements from "../../hooks/useMesurements";
 
 import refreshIcon from "../../assets/refresh.png";
 
 import "./index.scss";
 
 const InfosCard = ({ data, background, refreshWeather }) => {
+  const [face, setFace] = useState("recto");
+
   // Destructure data
   // Place
   const { name: city } = data;
@@ -16,32 +19,62 @@ const InfosCard = ({ data, background, refreshWeather }) => {
   const { description } = data.weather[0];
 
   const [iconSrc] = useIcon(data);
+  const [mesurements] = useMesurements(data);
+
+  const handleSwap = () => {
+    if (face === "recto") {
+      setFace("verso");
+    } else {
+      setFace("recto");
+    }
+  };
 
   return (
     <div
       className="card-weather container-fluid"
       // Display city background on card if param is selected
       style={{ backgroundImage: `url(${background})` }}
+      onClick={() => handleSwap()}
     >
       <div className="row">
-        <h2 className="card-weather-city">{city}</h2>
-        <div className="col-6 card-weather-col-measurements">
-          <h4 className="card-weather-description">
-            {description.toUpperCase()}
-          </h4>
-          <span className="card-weather-temperature">{`${Math.round(
-            temp
-          )}°`}</span>
-          <div className="card-weather-temperature-minmax">
-            <span>MIN: {`${Math.round(temp_min)}°`}</span>
-            <span>MAX: {`${Math.round(temp_max)}°`}</span>
-          </div>
-        </div>
-        <div className="col-6">
-          <div className="card-weather-icon">
-            <img src={iconSrc} alt="Logo" />
-          </div>
-        </div>
+        {face === "recto" ? (
+          <>
+            <h2 className="card-weather-city">{city}</h2>
+            <div className="col-6 card-weather-col-mesurements">
+              <h4 className="card-weather-description">
+                {description.toUpperCase()}
+              </h4>
+              <span className="card-weather-temperature">{`${Math.round(
+                temp
+              )}°`}</span>
+              <div className="card-weather-temperature-minmax">
+                <span>MIN: {`${Math.round(temp_min)}°`}</span>
+                <span>MAX: {`${Math.round(temp_max)}°`}</span>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="card-weather-icon">
+                <img src={iconSrc} alt="Logo" />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 className="card-weather-city">{city}</h2>
+            <div className="card-weather-mesurements-list">
+              {mesurements.map(m => (
+                <div className="card-weather-mesurements-item" key={m.name}>
+                  <span className="card-weather-mesurements-item-name">
+                    {m.name}
+                  </span>
+                  <span className="card-weather-mesurements-item-value">
+                    {m.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
       <img
         className="card-weather-refresh"
