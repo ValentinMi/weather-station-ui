@@ -1,37 +1,12 @@
-import { useEffect } from "react";
-
 import * as mediaWikiConst from "../consts/mediaWiki.const";
-import { getCityImg } from "../actions/mediaWiki.actions";
 
-import thunk from "redux-thunk";
-import promise from "redux-promise-middleware";
-import useMiddleware from "react-usemiddleware";
-
-const useMediaWiki = city => {
-  const initState = {
-    imgSrc: null,
-    isLoading: true,
-    error: null
-  };
-
-  const [state, dispatch] = useMiddleware(mediaWikiReducer, initState, [
-    promise,
-    thunk
-  ]);
-
-  // Map actions in object
-  const mediaWikiActions = {
-    getCityImg: city => dispatch(getCityImg(city))
-  };
-
-  useEffect(() => {
-    mediaWikiActions.getCityImg(city);
-  }, [city]);
-
-  return [state, mediaWikiActions];
+const initState = {
+  imgSrc: null,
+  isLoading: true,
+  error: null
 };
 
-function mediaWikiReducer(state, action) {
+function mediaWiki(state = initState, action) {
   // Destructure action
   const { type, payload } = action;
 
@@ -49,9 +24,10 @@ function mediaWikiReducer(state, action) {
       // Else set imgSrc
       let src = pages[0].original.source;
       return { ...state, isLoading: false, imgSrc: src };
+
     default:
       return state;
   }
 }
 
-export default useMediaWiki;
+export default mediaWiki;

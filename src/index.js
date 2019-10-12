@@ -1,7 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import { store } from "./store";
+import { Provider } from "react-redux";
+
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
 import MainBoard from "./pages/MainBoard";
+import ForecastBoard from "./pages/ForecastBoard";
+
+import PeriodMenu from "./components/PeriodMenu";
 
 import "./index.css";
 
@@ -10,9 +18,18 @@ import * as serviceWorker from "./serviceWorker";
 
 function App() {
   return (
-    <div className="App">
-      <MainBoard />
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <BrowserRouter>
+          <PeriodMenu />
+          <Switch>
+            <Route exact path="/today" component={MainBoard} />
+            <Route exact path="/week" component={ForecastBoard} />
+            <Redirect to="/today" />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </Provider>
   );
 }
 

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-import useWeather from "../../hooks/useWeather";
-import useMediaWiki from "../../hooks/useMediaWiki";
+import { switchSettingsVisibility } from "../../actions/settings.actions";
+import { fetchWeatherData } from "../../actions/weather.actions";
+import { getCityImg } from "../../actions/mediaWiki.actions";
+
 import useBackgroundVideo from "../../hooks/useBackgroundVideo";
-import useParameters from "../../hooks/useParameters";
 
 import InfosCard from "../../components/InfosCard";
-import ForecastBoard from "../../components/ForecastBoard";
+import TodayForecast from "../../components/TodayForecast";
 import Spinner from "../../components/Spinner/index";
 import ParametersList from "../../components/ParametersList";
 
@@ -14,68 +16,51 @@ import settingsIcon from "../../assets/settings.png";
 
 import "./index.scss";
 
-const MainBoard = () => {
-  // Parameters custom hook
-  const [paramsState, parameters, paramsActions] = useParameters();
+const MainBoard = ({ weather, mediaWiki, settings, actions }) => {
+  // Custom hooks
+  const [BackgroundVideo] = useBackgroundVideo(weather.actualWeatherData);
 
-  const {
-    backgroundVideo,
-    weatherInfos,
-    mediaWikiImg,
-    refreshInterval,
-    city
-  } = paramsState;
-
-  // Weather custom hook
-  const [weatherState, fetchData, icons] = useWeather(refreshInterval, city);
-  const {
-    isLoading: weatherIsLoading,
-    actualWeatherData,
-    forecastData,
-    error
-  } = weatherState;
-
-  // Wiki custom hook
-  const [mediaWikiState] = useMediaWiki(city);
-  const { isLoading: mediaWikiIsLoading, imgSrc } = mediaWikiState;
-
-  // Background video custom hook
-  const [BackgroundVideo] = useBackgroundVideo(actualWeatherData);
+  useEffect(() => {
+    actions.fetchWeatherData(settings.city);
+    actions.getCityImg(settings.city);
+    // eslint-disable-next-line
+  }, [settings.city, settings.selectedPeriod]);
 
   return (
     <>
-      {backgroundVideo && <BackgroundVideo />}
+      {settings.backgroundVideo && <BackgroundVideo />}
       <div className="container-fluid board">
         {// Display spinner on loading
-        weatherIsLoading || mediaWikiIsLoading ? (
+        weather.isLoading || mediaWiki.isLoading ? (
           <Spinner isBackgroundSpinner={true} />
         ) : (
           <>
-            {error && <span className="error-message">City not found</span>}
+            {weather.error && (
+              <span className="error-message">City not found</span>
+            )}
             <img
               className="settingsIcon"
               src={settingsIcon}
               alt="Settings"
-              onClick={() => paramsActions.switchSettingsVisibility()}
+              onClick={() => actions.switchSettingsVisibility()}
             />
             <div className="row">
               <div className="col-md-6">
-                {weatherInfos && (
+                {settings.weatherInfos && (
                   <InfosCard
-                    data={actualWeatherData}
-                    background={mediaWikiImg && imgSrc}
-                    icon={icons.actualWeatherIconSrc}
-                    refreshWeather={() => fetchData()}
+                    data={weather.actualWeatherData}
+                    background={settings.mediaWikiImg && mediaWiki.imgSrc}
+                    refreshWeather={() =>
+                      actions.fetchWeatherData(weather.city)
+                    }
                   />
                 )}
               </div>
               <div className="col-md-6 right-col">
-                {weatherInfos && !paramsState.isVisible && (
-                  <ForecastBoard data={forecastData} />
+                {settings.weatherInfos && !settings.isVisible && (
+                  <TodayForecast data={weather.forecastData} />
                 )}
-                {paramsState.isVisible && (
-                  <ParametersList parameters={parameters} />
-                )}
+                {settings.isVisible && <ParametersList />}
               </div>
             </div>
           </>
@@ -85,4 +70,24 @@ const MainBoard = () => {
   );
 };
 
-export default MainBoard;
+const mapStateToProps = state => ({
+  weather: state.weather,
+  settings: state.settings,
+  mediaWiki: state.mediaWiki
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    // Weather
+    fetchWeatherData: city => dispatch(fetchWeatherData(city)),
+    // Settings
+    switchSettingsVisibility: () => dispatch(switchSettingsVisibility()),
+    // MediaWiki
+    getCityImg: city => dispatch(getCityImg(city))
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainBoard);

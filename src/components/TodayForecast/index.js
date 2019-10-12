@@ -4,7 +4,7 @@ import ForecastCard from "../ForecastCard";
 
 import "./index.scss";
 
-const ForecastBoard = ({ data }) => {
+const TodayForecast = ({ data }) => {
   const { list } = data;
 
   const todayForecast = [list[0], list[1], list[2], list[3], list[4]];
@@ -22,4 +22,4 @@ const ForecastBoard = ({ data }) => {
   );
 };
 
-export default ForecastBoard;
+export default TodayForecast;

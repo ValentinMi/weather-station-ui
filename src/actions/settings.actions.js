@@ -1,32 +1,32 @@
-import * as parametersConst from "../consts/parameters.const";
+import * as settingsConst from "../consts/settings.const";
 
 export const switchMediaWikiImg = () => dispatch => {
   dispatch({
-    type: parametersConst.SWITCH_MEDIA_WIKI_IMG
+    type: settingsConst.SWITCH_MEDIA_WIKI_IMG
   });
 };
 
 export const switchBackgroundVideo = () => dispatch => {
   dispatch({
-    type: parametersConst.SWITCH_BACKGROUND_VIDEO
+    type: settingsConst.SWITCH_BACKGROUND_VIDEO
   });
 };
 
 export const switchWeatherInfos = () => dispatch => {
   dispatch({
-    type: parametersConst.SWITCH_WEATHER_INFOS
+    type: settingsConst.SWITCH_WEATHER_INFOS
   });
 };
 
 export const switchSettingsVisibility = () => dispatch => {
   dispatch({
-    type: parametersConst.SWITCH_SETTINGS_VISIBILITY
+    type: settingsConst.SWITCH_SETTINGS_VISIBILITY
   });
 };
 
 export const changeRefreshInterval = nbr => dispatch => {
   dispatch({
-    type: parametersConst.CHANGE_REFRESH_INTERVAL,
+    type: settingsConst.CHANGE_REFRESH_INTERVAL,
     payload: {
       nbr
     }
@@ -35,9 +35,18 @@ export const changeRefreshInterval = nbr => dispatch => {
 
 export const changeCity = city => dispatch => {
   dispatch({
-    type: parametersConst.CHANGE_CITY,
+    type: settingsConst.CHANGE_CITY,
     payload: {
       city
+    }
+  });
+};
+
+export const changeSelectedPeriod = period => dispatch => {
+  dispatch({
+    type: settingsConst.CHANGE_SELECTED_PERIOD,
+    payload: {
+      period
     }
   });
 };

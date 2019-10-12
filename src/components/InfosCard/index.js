@@ -1,10 +1,12 @@
 import React from "react";
 
+import useIcon from "../../hooks/useIcon";
+
 import refreshIcon from "../../assets/refresh.png";
 
 import "./index.scss";
 
-const InfosCard = ({ data, background, icon, refreshWeather }) => {
+const InfosCard = ({ data, background, refreshWeather }) => {
   // Destructure data
   // Place
   const { name: city } = data;
@@ -12,7 +14,8 @@ const InfosCard = ({ data, background, icon, refreshWeather }) => {
   const { temp, temp_max, temp_min } = data.main;
   // Weather
   const { description } = data.weather[0];
-  // Date
+
+  const [iconSrc] = useIcon(data);
 
   return (
     <div
@@ -36,7 +39,7 @@ const InfosCard = ({ data, background, icon, refreshWeather }) => {
         </div>
         <div className="col-6">
           <div className="card-weather-icon">
-            <img src={icon} alt="Logo" />
+            <img src={iconSrc} alt="Logo" />
           </div>
         </div>
       </div>

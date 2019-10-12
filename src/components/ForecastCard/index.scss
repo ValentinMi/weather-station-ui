@@ -1,4 +1,4 @@
-.card-forecast {
+.card-forecast-today {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px 10px 10px 10px;
   display: flex;
@@ -6,10 +6,10 @@
   align-items: center;
   color: #fff;
   padding-right: 10px;
-  .card-forecast-icon {
+  .card-forecast-today-icon {
     height: 70px;
   }
-  .card-forecast-degree {
+  .card-forecast-today-degree {
     font-weight: bold;
     font-size: 30px;
   }
