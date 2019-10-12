@@ -1,6 +1,5 @@
 const useMesurements = data => {
   const { temp, temp_max, temp_min, pressure, humidity } = data.main;
-  const { description } = data.weather[0];
   const { speed, deg } = data.wind;
 
   const mesurements = [
