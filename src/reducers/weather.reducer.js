@@ -3,7 +3,7 @@ import * as weatherConst from "../consts/weather.const";
 const initState = {
   actualWeatherData: undefined,
   forecastData: undefined,
-  isLoading: true,
+  isLoading: undefined,
   error: null
 };
 

@@ -31,7 +31,7 @@ const ParametersList = ({ settings, actions }) => {
     },
     {
       type: "switch",
-      name: "Weather infos :",
+      name: "Interface :",
       action: actions.switchWeatherInfos,
       isChecked: settings.weatherInfos
     },

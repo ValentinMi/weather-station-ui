@@ -25,7 +25,7 @@ const ForecastCard = ({ data, settings }) => {
       );
     case "week":
       return (
-        <div className="card-forecast-week col-3">
+        <div className="card-forecast-week col-12">
           <img className="card-forecast-week-icon" src={iconSrc} alt="" />
           <span className="card-forecast-week-degree">{parseInt(degree)}°</span>
           <span className="card-forecast-week-date">{stringDate}</span>

@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+
+import { changeSelectedPeriod } from "../../actions/settings.actions";
 
 import "./index.scss";
 
-const PeriodMenu = ({ settings }) => {
+const PeriodMenu = ({ settings, actions }) => {
+  let location = useLocation();
+  useEffect(() => {
+    // Remove "/" in pathname and change selectedPeriod
+    actions.changeSelectedPeriod(
+      location.pathname
+        .split("")
+        .splice(1)
+        .join("")
+    );
+    // eslint-disable-next-line
+  }, [location]);
+
   return (
     <>
       {settings.weatherInfos && (
@@ -25,4 +39,13 @@ const mapStateToProps = state => ({
   settings: state.settings
 });
 
-export default connect(mapStateToProps)(PeriodMenu);
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    changeSelectedPeriod: period => dispatch(changeSelectedPeriod(period))
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PeriodMenu);
