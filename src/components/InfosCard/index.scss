@@ -52,6 +52,10 @@ $font-color: #fff;
     position: absolute;
     right: 10px;
     bottom: 10px;
+    .card-weather-refresh-btn {
+      margin-left: 10px;
+      font-weight: bold;
+    }
   }
 
   .card-weather-mesurements-list {

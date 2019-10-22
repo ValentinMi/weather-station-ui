@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect, useSelector } from "react-redux";
 
 import useIcon from "../../hooks/useIcon";
 import useMesurements from "../../hooks/useMesurements";
@@ -9,10 +10,10 @@ import "./index.scss";
 
 const InfosCard = ({ data, background, refreshWeather }) => {
   const [face, setFace] = useState("recto");
+  const cityName = useSelector(state => state.settings.city);
+  const lastRefresh = useSelector(state => state.weather.lastRefresh);
 
   // Destructure data
-  // Place
-  const { name: city } = data;
   // Measurements
   const { temp, temp_max, temp_min } = data.main;
   // Weather
@@ -39,7 +40,7 @@ const InfosCard = ({ data, background, refreshWeather }) => {
       <div className="row">
         {face === "recto" ? (
           <>
-            <h2 className="card-weather-city">{city}</h2>
+            <h2 className="card-weather-city">{cityName}</h2>
             <div className="col-6 card-weather-col-mesurements">
               <h4 className="card-weather-description">
                 {description.toUpperCase()}
@@ -60,7 +61,7 @@ const InfosCard = ({ data, background, refreshWeather }) => {
           </>
         ) : (
           <>
-            <h2 className="card-weather-city">{city}</h2>
+            <h2 className="card-weather-city">{cityName}</h2>
             <div className="card-weather-mesurements-list">
               {mesurements.map(m => (
                 <div className="card-weather-mesurements-item" key={m.name}>
@@ -76,14 +77,17 @@ const InfosCard = ({ data, background, refreshWeather }) => {
           </>
         )}
       </div>
-      <img
-        className="card-weather-refresh"
-        src={refreshIcon}
-        alt="Refresh"
-        onClick={() => refreshWeather()}
-      />
+      <div className="card-weather-refresh">
+        <span>{lastRefresh}</span>
+        <img
+          className="card-weather-refresh-btn"
+          src={refreshIcon}
+          alt="Refresh"
+          onClick={() => refreshWeather()}
+        />
+      </div>
     </div>
   );
 };
 
-export default InfosCard;
+export default connect()(InfosCard);

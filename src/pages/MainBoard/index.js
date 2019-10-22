@@ -51,7 +51,7 @@ const MainBoard = ({ weather, mediaWiki, settings, actions }) => {
                     data={weather.actualWeatherData}
                     background={settings.mediaWikiImg && mediaWiki.imgSrc}
                     refreshWeather={() =>
-                      actions.fetchWeatherData(weather.city)
+                      actions.fetchWeatherData(settings.city)
                     }
                   />
                 )}

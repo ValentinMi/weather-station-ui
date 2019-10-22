@@ -11,6 +11,7 @@ import rainVideo from "../assets/videos/rain.mp4";
 import showerRainVideo from "../assets/videos/showerRain.mp4";
 import nightVideo from "../assets/videos/night.mp4";
 import nightRainVideo from "../assets/videos/nightRain.mp4";
+import mistVideo from "../assets/videos/mist.mp4";
 
 const useBackgroundVideo = actualWeatherData => {
   const [videoSrc, setVideoSrc] = useState();
@@ -44,12 +45,15 @@ function getVideoSrc(iconId) {
       return rainVideo;
     case "11d":
       return thunderStormVideo;
+    case "50d":
+      return mistVideo;
     // Night
     case "09n":
       return nightRainVideo;
     case "10n":
       return nightRainVideo;
     default:
+      console.log("Unclassified video");
       return nightVideo;
   }
 }

@@ -11,9 +11,9 @@ import ForecastBoard from "./pages/ForecastBoard";
 
 import PeriodMenu from "./components/PeriodMenu";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
 
 function App() {

@@ -3,6 +3,7 @@ import * as weatherConst from "../consts/weather.const";
 const initState = {
   actualWeatherData: undefined,
   forecastData: undefined,
+  lastRefresh: undefined,
   isLoading: undefined,
   error: null
 };
@@ -22,6 +23,7 @@ function weather(state = initState, action) {
         ...state,
         isLoading: false,
         actualWeatherData: payload.data,
+        lastRefresh: `${new Date().getHours()}h${new Date().getMinutes()}`,
         error: null
       };
     case weatherConst.GET_FORECAST_WEATHER_PENDING:
