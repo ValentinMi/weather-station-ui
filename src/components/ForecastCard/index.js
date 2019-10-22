@@ -1,18 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import useIcon from "../../hooks/useIcon";
 
 import "./index.scss";
 
-const ForecastCard = ({ data, settings }) => {
+const ForecastCard = ({ data }) => {
   const degree = data.main.temp;
-  const date = data.dt_txt;
-  const stringDate = new Date(date).toLocaleString();
+  const date = new Date(data.dt_txt);
+  const treatedDate = `${date.getDay()}/${date.getMonth()} ${date.getHours()}h`;
 
   const [iconSrc] = useIcon(data);
 
-  switch (settings.selectedPeriod) {
+  const selectedPeriod = useSelector(state => state.settings.selectedPeriod);
+
+  switch (selectedPeriod) {
     case "today":
       return (
         <div className="card-forecast-today">
@@ -20,7 +22,7 @@ const ForecastCard = ({ data, settings }) => {
           <span className="card-forecast-today-degree">
             {parseInt(degree)}°
           </span>
-          <span className="card-forecast-today-date">{stringDate}</span>
+          <span className="card-forecast-today-date">{treatedDate}</span>
         </div>
       );
     case "week":
@@ -28,7 +30,7 @@ const ForecastCard = ({ data, settings }) => {
         <div className="card-forecast-week col-12">
           <img className="card-forecast-week-icon" src={iconSrc} alt="" />
           <span className="card-forecast-week-degree">{parseInt(degree)}°</span>
-          <span className="card-forecast-week-date">{stringDate}</span>
+          <span className="card-forecast-week-date">{treatedDate}</span>
         </div>
       );
 
@@ -37,8 +39,4 @@ const ForecastCard = ({ data, settings }) => {
   }
 };
 
-const mapStateToProps = state => ({
-  settings: state.settings
-});
-
-export default connect(mapStateToProps)(ForecastCard);
+export default connect()(ForecastCard);
