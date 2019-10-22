@@ -6,6 +6,7 @@ import { fetchWeatherData } from "../../actions/weather.actions";
 import { getCityImg } from "../../actions/mediaWiki.actions";
 
 import useBackgroundVideo from "../../hooks/useBackgroundVideo";
+import useInterval from "../../hooks/useInterval";
 
 import InfosCard from "../../components/InfosCard";
 import TodayForecast from "../../components/TodayForecast";
@@ -25,6 +26,12 @@ const MainBoard = ({ weather, mediaWiki, settings, actions }) => {
     actions.getCityImg(settings.city);
     // eslint-disable-next-line
   }, [settings.city, settings.selectedPeriod]);
+
+  // Auto refresh
+  useInterval(() => {
+    actions.fetchWeatherData(settings.city);
+    actions.getCityImg(settings.city);
+  }, settings.refreshInterval);
 
   return (
     <>
