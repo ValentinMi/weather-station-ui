@@ -10,6 +10,7 @@ import MainBoard from "./pages/MainBoard";
 import ForecastBoard from "./pages/ForecastBoard";
 
 import PeriodMenu from "./components/PeriodMenu";
+import Clock from "./components/Clock";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -21,7 +22,10 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <BrowserRouter>
-          <PeriodMenu />
+          <div className="header">
+            <Clock />
+            <PeriodMenu />
+          </div>
           <Switch>
             <Route exact path="/today" component={MainBoard} />
             <Route exact path="/week" component={ForecastBoard} />

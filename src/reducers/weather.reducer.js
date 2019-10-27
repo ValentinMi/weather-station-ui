@@ -23,7 +23,10 @@ function weather(state = initState, action) {
         ...state,
         isLoading: false,
         actualWeatherData: payload.data,
-        lastRefresh: `${new Date().getHours()}h${new Date().getMinutes()}`,
+        lastRefresh: new Date()
+          .toTimeString()
+          .split("")
+          .splice(0, 5),
         error: null
       };
     case weatherConst.GET_FORECAST_WEATHER_PENDING:

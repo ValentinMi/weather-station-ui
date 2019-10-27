@@ -3,14 +3,14 @@
   display: flex;
   justify-content: space-around;
   z-index: 999;
-  position: fixed;
-  margin-top: 20px;
   .period-menu-link {
     background: rgba(0, 0, 0, 0.3);
     color: white;
     text-decoration: none;
     font-size: 1.2em;
     font-weight: bold;
-    padding: 0 1%;
+    border-radius: 30px;
+    padding: 0 2%;
+    text-align: center;
   }
 }
