@@ -62,7 +62,11 @@ const Parameter = ({
       return (
         <div className="param">
           <span className="param-name">{name}</span>
-          <Switch checked={isChecked} onChange={handleChange} />
+          <Switch
+            className="param-switch"
+            checked={isChecked}
+            onChange={handleChange}
+          />
         </div>
       );
     case "value":
@@ -74,7 +78,7 @@ const Parameter = ({
             defaultValue={"15 mins"}
             placeholder={value}
             onChange={handleChange}
-            className="form-control"
+            className="form-control param-select"
             id="exampleFormControlSelect1"
           >
             <option>5 mins</option>

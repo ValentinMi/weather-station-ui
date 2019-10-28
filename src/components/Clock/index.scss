@@ -4,4 +4,7 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: bold;
   font-size: 2em;
+  @media (min-width: 1100px) {
+    font-size: 6em;
+  }
 }

@@ -6,12 +6,26 @@
   align-items: center;
   color: #fff;
   padding-right: 10px;
+  @media (min-width: 1100px) {
+    height: 15%;
+  }
   .card-forecast-today-icon {
     height: 70px;
+    @media (min-width: 1100px) {
+      height: 90%;
+    }
   }
   .card-forecast-today-degree {
     font-weight: bold;
     font-size: 30px;
+    @media (min-width: 1100px) {
+      font-size: 4em;
+    }
+  }
+  .card-forecast-today-date {
+    @media (min-width: 1100px) {
+      font-size: 3em;
+    }
   }
 }
 
@@ -27,8 +41,19 @@
   .card-forecast-week-degree {
     font-size: 1.8em;
     font-weight: bold;
+    @media (min-width: 1100px) {
+      font-size: 4em;
+    }
   }
   .card-forecast-week-icon {
     height: 70px;
+    @media (min-width: 1100px) {
+      height: 90%;
+    }
+  }
+  .card-forecast-week-date {
+    @media (min-width: 1100px) {
+      font-size: 3em;
+    }
   }
 }

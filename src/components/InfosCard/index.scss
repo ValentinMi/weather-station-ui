@@ -2,21 +2,30 @@ $font-color: #fff;
 
 .card-weather {
   position: relative;
-  max-width: 370px;
+  width: 100%;
   border-radius: 10%;
   padding: 6%;
-  height: 360px;
+  height: 77vh;
   margin-top: 30px;
   color: $font-color;
   // Background and overlay
   background-size: cover;
   background-position: center;
-  // box-shadow: inset 0 0 0 200px rgba(33, 93, 223, 0.5);
-  box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);
+  @media (min-width: 1100px) {
+    border-radius: 30px;
+    & > .row {
+      height: 100%;
+    }
+  }
   .card-weather-city {
     width: 100%;
     text-align: center;
     font-weight: bold;
+    height: 60px;
+    @media (min-width: 1100px) {
+      font-size: 3em;
+    }
   }
   .card-weather-col-mesurements {
     & > * {
@@ -25,15 +34,31 @@ $font-color: #fff;
     padding-left: 8%;
     .card-weather-description {
       font-weight: bold;
+      @media (min-width: 1100px) {
+        font-size: 4em;
+      }
     }
     .card-weather-temperature {
       font-size: 4em;
+      @media (min-width: 1100px) {
+        font-size: 10em;
+      }
     }
     .card-weather-temperature-minmax {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       font-size: 1.5em;
+      @media (min-width: 1100px) {
+        font-size: 3em;
+      }
+    }
+    @media (min-width: 1100px) {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8% 5%;
     }
   }
   .card-weather-icon {
@@ -46,27 +71,49 @@ $font-color: #fff;
       background-color: rgba(211, 211, 211, 0.3);
 
       border-radius: 50%;
+      @media (min-width: 1100px) {
+        height: 60%;
+      }
     }
   }
   .card-weather-refresh {
     position: absolute;
     right: 10px;
     bottom: 10px;
+
     .card-weather-refresh-btn {
       margin-left: 10px;
       font-weight: bold;
+      @media (min-width: 1100px) {
+        height: 4vh;
+      }
+    }
+    .card-weather-lastrefresh {
+      @media (min-width: 1100px) {
+        font-size: 2em;
+      }
     }
   }
 
   .card-weather-mesurements-list {
     width: 100%;
     text-transform: capitalize;
+    @media (min-width: 1100px) {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
     .card-weather-mesurements-item {
       display: flex;
       justify-content: space-around;
       align-items: center;
       margin: 10px 0;
       font-size: 1.2em;
+      @media (min-width: 1100px) {
+        justify-content: space-between;
+        font-size: 4em;
+      }
     }
   }
 }

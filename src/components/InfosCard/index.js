@@ -32,7 +32,7 @@ const InfosCard = ({ data, background, refreshWeather }) => {
 
   return (
     <div
-      className="card-weather container-fluid"
+      className="card-weather"
       // Display city background on card if param is selected
       style={{ backgroundImage: `url(${background})` }}
       onClick={() => handleSwap()}
@@ -78,7 +78,7 @@ const InfosCard = ({ data, background, refreshWeather }) => {
         )}
       </div>
       <div className="card-weather-refresh">
-        <span>{lastRefresh}</span>
+        <span className="card-weather-lastrefresh">{lastRefresh}</span>
         <img
           className="card-weather-refresh-btn"
           src={refreshIcon}
