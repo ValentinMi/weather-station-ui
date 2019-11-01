@@ -1,8 +1,14 @@
+.video {
+  position: sticky;
+}
 .board {
   height: 100vh;
   padding: 5%;
   // Default background is backvideo is off
   background: #000000;
+  @media screen and (min-height: 568px) and (min-width: 320px) {
+    height: 100%;
+  }
   .settingsIcon {
     position: absolute;
     top: 10px;
